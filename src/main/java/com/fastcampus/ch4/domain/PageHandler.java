@@ -3,21 +3,21 @@ package com.fastcampus.ch4.domain;
 import java.util.Iterator;
 
 public class PageHandler {
-	int totalCnt; // 총 게시물 객수
-	int pageSize; // 현 페이지의 크기
-	int navSize = 10; // 페이지 내비게이션의 크기
-	int totalPage; // 전체 페이지의 갯수
-	int page; // 현재 페이지
-	public int beginPage; // 내비게이션의 첫번째 페이지
-	int endPage; // 내비게이션의 마지막 페이지
-	boolean showPrev; // 이전페이지로 이동하는 링크를 보여줄 것인지 여부
-	boolean showNext; // 다음페이지로 이동하는 링크를 보여줄 것인지 여부
+	private int totalCnt; // 총 게시물 객수
+	private int pageSize; // 현 페이지의 크기
+	private int navSize = 10; // 페이지 내비게이션의 크기
+	private int totalPage; // 전체 페이지의 갯수
+	private int page; // 현재 페이지
+	private int beginPage; // 내비게이션의 첫번째 페이지
+	private int endPage; // 내비게이션의 마지막 페이지
+	private boolean showPrev; // 이전페이지로 이동하는 링크를 보여줄 것인지 여부
+	private boolean showNext; // 다음페이지로 이동하는 링크를 보여줄 것인지 여부
 
 	public PageHandler(int totalCnt , int page) {
 		this.totalCnt =totalCnt;
 		this.page = page;
 		this.pageSize = 10;
-		totalPage = (int)Math.ceil(totalCnt / pageSize);
+		totalPage = (int)Math.ceil(totalCnt /(double)pageSize);
 		beginPage = page / navSize * navSize + 1;
 		endPage = Math.min(beginPage + navSize-1, totalPage);
 		showPrev = beginPage !=1;
