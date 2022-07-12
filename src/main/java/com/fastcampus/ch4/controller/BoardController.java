@@ -36,6 +36,8 @@ public class BoardController {
 			map.put("pageSize", pageSize);
 			
 			List<BoardDto> list = boardService.getPage(map);
+			System.out.println("totalcnt : "+totalCnt);
+			System.out.println(list.toString());
 			m.addAttribute("list",list);
 			m.addAttribute("ph",pageHandler);
 		} catch (Exception e) {

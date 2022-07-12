@@ -8,6 +8,8 @@ import com.fastcampus.ch4.domain.PageHandler;
 
 public class PageHandlerTest {
 
+
+	
 	@Test
 	public void test() {
 		PageHandler ph = new PageHandler(250,1);
