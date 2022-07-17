@@ -17,6 +17,27 @@ import java.util.*;
 public class BoardController {
 	@Autowired
 	BoardService boardService;
+	
+	
+	@GetMapping("/read")
+	public String read(Integer bno,Integer page, Integer pageSize, Model m) {
+		try {
+			BoardDto boardDto = boardService.read(bno);
+			//m.addAttribute("boardDto",boardDto); //아래 문장과 동일
+			m.addAttribute(boardDto);
+			m.addAttribute("page",page);
+			m.addAttribute("pageSzie",pageSize);
+			System.out.println("절취선###########################");
+			System.out.println("절취선###########################");
+			System.out.println("절취선###########################");
+			System.out.println(pageSize);
+			System.out.println(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "board";
+	} 
+	
 
 	@GetMapping("/list")
 	public String list(Integer page, Integer pageSize ,Model m, HttpServletRequest request) {
@@ -40,6 +61,8 @@ public class BoardController {
 			System.out.println(list.toString());
 			m.addAttribute("list",list);
 			m.addAttribute("ph",pageHandler);
+			m.addAttribute("page",page);
+			m.addAttribute("pageSize",pageSize);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
