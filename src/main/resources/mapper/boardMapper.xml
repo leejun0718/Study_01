@@ -52,6 +52,7 @@
           , content = #{content}
           , up_date = now()
         WHERE bno = #{bno}
+         AND writer = #{writer}
     </update>
 
     <update id="updateCommentCnt" parameterType="map">

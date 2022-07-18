@@ -24,17 +24,17 @@ public class BoardDaoImplTest {
 	@Autowired
 	BoardDao boardDao;
 	
-	@Test
-	public void inserttest() throws Exception {
-		boardDao.deleteAll();
-		for(int i=1; i<=220; i++) {
-			BoardDto boardDto = new BoardDto("title"+1,"no content", "asdf");
-			boardDao.insert(boardDto);
-			
-		}
-		
-	}
-	
+//	@Test
+//	public void inserttest() throws Exception {
+//		boardDao.deleteAll();
+//		for(int i=1; i<=220; i++) {
+//			BoardDto boardDto = new BoardDto("title"+1,"no content", "asdf");
+//			boardDao.insert(boardDto);
+//			
+//		}
+//		
+//	}
+//	
 	
 //	
 //	@Test
@@ -50,22 +50,23 @@ public class BoardDaoImplTest {
 //	}
 //	
 //	
-//	@Test
-//	public  void update() throws Exception{
-//		
-//		BoardDto boardDto = new BoardDto(1,"변경함","변경함","주노찌", 0, 0, new Date());
-//		int rowCnt = boardDao.update(boardDto);
-//		assertTrue(rowCnt==1);
-//		
-//		int t1 = 5;
-//		int t2 = 10;
-//		
-//		System.out.println("sssssssssssssssssssssss");
-//		System.out.println("계산1    " + 5 / 10);
-//		System.out.println("계산2    " + ((5 / 10 * 10)+1));
-//		
-//		
-//	}
+	@Test
+	public  void update() throws Exception{
+		
+		//BoardDto boardDto = new BoardDto(1,"변경함","변경함","주노찌", 0, 0, new Date());
+		//int rowCnt = boardDao.update(boardDto);
+		//assertTrue(rowCnt==1);
+		
+		int t1 = 5;
+		int t2 = 10;
+		
+		System.out.println("sssssssssssssssssssssss");
+		System.out.println("계산1    " + 11 / 10);
+		System.out.println("계산1    " + (5-1) / 10 *10);
+		System.out.println("계산2    " + ((5 / 10 * 10)+1));
+		
+
+	}
 //    @Test
 //    public void increaseViewCntTest() throws Exception {
 //        boardDao.deleteAll();

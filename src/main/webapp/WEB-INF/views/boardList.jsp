@@ -20,6 +20,7 @@
 	</ul> 
 </div>
 <div style="text-align:center">
+	<button type="button" id="writeBtn" onclick="location.href='<c:url value="/board/write"/>'">글쓰기</button>
     <table border="1">
         <tr>
             <th>번호</th>
@@ -52,5 +53,19 @@
 	</div>
 
 </div>
+<script type="text/javascript">
+var msg = "${msg}";
+
+if(msg =="DEL_OK"){
+alert("삭제처리 되었습니다.");
+}else if(msg == "DEL_ERR"){
+	alert("삭제 실패하였습니다.");
+}else if(msg == "WRT_OK"){
+	alert("성공적으로 등록되었습니다.");
+}
+
+
+</script>
+
 </body>
 </html>

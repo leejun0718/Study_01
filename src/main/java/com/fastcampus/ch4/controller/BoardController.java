@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.*;
 
 import javax.servlet.http.*;
+
+import java.net.URLEncoder;
 import java.time.*;
 import java.util.*;
 
@@ -17,26 +19,57 @@ import java.util.*;
 public class BoardController {
 	@Autowired
 	BoardService boardService;
-	
-	
-	@GetMapping("/read")
-	public String read(Integer bno,Integer page, Integer pageSize, Model m) {
+
+
+	@PostMapping("/modify")
+	public String modify(BoardDto boardDto,Model m, HttpSession session,RedirectAttributes rattr) {
+		String writer = (String) session.getAttribute("id");
+		boardDto.setWriter(writer);
 		try {
-			BoardDto boardDto = boardService.read(bno);
-			//m.addAttribute("boardDto",boardDto); //아래 문장과 동일
-			m.addAttribute(boardDto);
-			m.addAttribute("page",page);
-			m.addAttribute("pageSzie",pageSize);
-			System.out.println("절취선###########################");
-			System.out.println("절취선###########################");
-			System.out.println("절취선###########################");
-			System.out.println(pageSize);
-			System.out.println(page);
+			int rowCnt = boardService.modify(boardDto);
+			
+			if(rowCnt != 1) {
+				throw new Exception("MODIFY FAIL");
+			}
+			rattr.addFlashAttribute("msg","MOD_OK");
+			return "redirect:/board/list";
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+			m.addAttribute("boardDto",boardDto);
+			rattr.addFlashAttribute("msg","MOD_ERR");
+			return "board";
 		}
+		
+	}
+	
+	@PostMapping("/write")
+	public String write(BoardDto boardDto,Model m, HttpSession session,RedirectAttributes rattr) {
+		String writer = (String) session.getAttribute("id");
+		boardDto.setWriter(writer);
+		try {
+			int rowCnt = boardService.write(boardDto);
+			
+			if(rowCnt != 1) {
+				throw new Exception("write fail");
+			}
+			rattr.addFlashAttribute("msg","WRT_OK");
+			return "redirect:/board/list";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			m.addAttribute("boardDto",boardDto);
+			rattr.addFlashAttribute("msg","WRT_ERR");
+			return "board";
+		}
+		
+	}
+	
+	@GetMapping("/write")
+	public String write(Model m) {
+		m.addAttribute("mode","new");
 		return "board";
-	} 
+	}
 	
 
 	@GetMapping("/list")
@@ -75,5 +108,50 @@ public class BoardController {
 		HttpSession session = request.getSession();
 		// 2. 세션에 id가 있는지 확인, 있으면 true를 반환
 		return session.getAttribute("id")!=null;
+	}
+	
+	@GetMapping("/read")
+	public String read(Integer bno,Integer page, Integer pageSize, Model m) {
+		try {
+			BoardDto boardDto = boardService.read(bno);
+			//m.addAttribute("boardDto",boardDto); //아래 문장과 동일
+			m.addAttribute(boardDto);
+			m.addAttribute("page",page);
+			m.addAttribute("pageSzie",pageSize);
+			System.out.println("절취선###########################");
+			System.out.println("절취선###########################");
+			System.out.println("절취선###########################");
+			System.out.println(pageSize);
+			System.out.println(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "board";
+	}
+	
+	
+	@PostMapping("/remove")
+	public String remove(Integer bno, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
+		String writer = (String)session.getAttribute("id");
+		
+		try {
+			m.addAttribute("page",page);
+			m.addAttribute("pageSize",pageSize);
+			int rowCnt = boardService.remove(bno, writer);
+			
+			if(rowCnt == 1) {
+				rattr.addFlashAttribute("msg","DEL_OK");
+				return "redirect:/board/list";
+			}else {
+				throw new Exception("board remove error");
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			rattr.addFlashAttribute("msg","DEL_ERR");
+		}
+		
+		return "redirect:/board/list";
 	}
 }
