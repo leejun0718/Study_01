@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fastcampus.ch4.domain.BoardDto;
+import com.fastcampus.ch4.domain.SearchCondition;
 
 
 
@@ -20,6 +21,6 @@ public interface BoardDao {
     int deleteAll() throws Exception;
     int count() throws Exception;
 
-//    int searchResultCnt(SearchCondition sc) throws Exception;
-//    List<BoardDto> searchSelectPage(SearchCondition sc) throws Exception;
+    int searchResultCnt(SearchCondition sc) throws Exception;
+    List<BoardDto> searchSelectPage(SearchCondition sc) throws Exception;
 }
