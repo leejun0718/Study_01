@@ -109,7 +109,8 @@ public class BoardController {
             List<BoardDto> list = boardService.getSearchResultPage(sc);
             m.addAttribute("list", list);
             m.addAttribute("ph", pageHandler);
-
+System.out.println("list?? : " +list.size());
+System.out.println("totalCnttotalCnttotalCnt" + totalCnt);
             Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
             m.addAttribute("startOfToday", startOfToday.toEpochMilli());
         } catch (Exception e) {
