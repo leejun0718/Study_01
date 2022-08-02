@@ -101,6 +101,7 @@ public ResponseEntity<String> write(@RequestBody CommentDto dto, Integer bno, Ht
 		
 		try {
 			list = service.getList(bno);
+			System.out.println("list = "+ list);
 			return new ResponseEntity<List<CommentDto>>(list,HttpStatus.OK); //200
 		} catch (Exception e) {
 			e.printStackTrace();

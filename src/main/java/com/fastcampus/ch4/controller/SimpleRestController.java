@@ -10,6 +10,11 @@ public class SimpleRestController {
     public String ajax() {
         return "ajax";
     }
+    
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
 
     @PostMapping("/send")
     @ResponseBody
